@@ -16,8 +16,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Controls\" />
+    <None Remove="Utils\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
+    <Folder Include="Utils\" />
   </ItemGroup>
 </Project>
