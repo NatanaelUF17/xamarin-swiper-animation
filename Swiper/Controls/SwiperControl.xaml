@@ -43,8 +43,23 @@
             </ContentView>
 
             <!-- StackLayout for like here -->
-            
+            <StackLayout x:Name="likeStackLayout" Grid.Column="2"
+                         Opacity="0" Padding="0,100">
+                <Label Text="LIKE"
+                       TextColor="Lime"
+                       FontSize="30"
+                       Rotation="30" />
+            </StackLayout>
+
             <!-- StackLayout for deny here -->
+            <StackLayout x:Name="denyStackLayout" Opacity="0"
+                         Padding="0, 100" HorizontalOptions="End">
+                <Label Text="DENY"
+                       TextColor="Red"
+                       FontSize="30"
+                       Rotation="-20"
+                       FontAttributes="Bold" />
+            </StackLayout>
 
         </Grid>    
     </ContentView.Content>
