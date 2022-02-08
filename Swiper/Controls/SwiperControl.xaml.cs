@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using Swiper.Utils;
 using Xamarin.Forms;
 
@@ -13,7 +14,10 @@ namespace Swiper.Controls
 
         private const double DeadZone = 0.4d;
         private const double DecisionThreshold = 0.4d;
-        
+
+        public event EventHandler OnLike;
+        public event EventHandler OnDeny;
+
         public SwiperControl()
         {
             InitializeComponent();
@@ -101,9 +105,40 @@ namespace Swiper.Controls
 
         private void PanCompleted()
         {
+            if (CheckForExitCriteria())
+            {
+                Exit();
+            }
+
+            likeStackLayout.Opacity = 0;
+            denyStackLayout.Opacity = 0;
+
             photo.TranslateTo(0, 0, 250, Easing.SpringOut);
             photo.RotateTo(_initialRotation, 250, Easing.SpringOut);
             photo.ScaleTo(1, 250);
+        }
+
+        private void Exit()
+        {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                var direction = photo.TranslationX < 0 ? -1 : 1;
+
+                if (direction > 0)
+                {
+                    OnLike?.Invoke(this, new EventArgs());
+                }
+
+                if (direction < 0)
+                {
+                    OnDeny?.Invoke(this, new EventArgs());
+                }
+
+                await photo.TranslateTo(photo.TranslationX + (_screenWidth * direction), photo.TranslationY, 200, Easing.CubicIn);
+
+                var parent = Parent as Layout<View>;
+                parent?.Children.Remove(this);
+            });
         }
 
         private bool CheckForExitCriteria()

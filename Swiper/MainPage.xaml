@@ -10,6 +10,26 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="1" Padding="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <Label Text="LIKES" />
+            <Label x:Name="likeLabel"
+                   Grid.Row="1"
+                   Text="0"
+                   FontSize="Large"
+                   FontAttributes="Bold" />
+
+            <Label Text="DENIED" Grid.Row="2"/>
+            <Label x:Name="denyLabel"
+                   Grid.Row="3"
+                   Text="0"
+                   FontSize="Large"
+                   FontAttributes="Bold" />
 
         </Grid>
     </Grid>
